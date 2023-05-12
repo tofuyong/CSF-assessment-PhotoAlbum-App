@@ -1,0 +1,43 @@
+<h2>Upload Photo Archive</h2>
+
+<form [formGroup]="uploadForm" (ngSubmit)="submit()">
+    <table>
+        <tr>
+            <td>Name: </td>
+            <td>
+                <input type="text" formControlName="name" placeholder="Name">
+                <span *ngIf="hasError('name')">
+                    Name is mandatory
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>Title: </td>
+            <td>
+                <input type="text" formControlName="title" placeholder="Title">
+                <span *ngIf="hasError('title')">
+                    Please enter a title with at least 3 characters
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td>Comments: </td>
+            <td>
+                <textarea cols="30" rows="5" formControlName="comments" placeholder="Your comments in here"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>Archive: </td>
+            <td>
+                <input type="file" formControlName="archive" (change)="onFileSelected($event)" placeholder="ZIP archive of photos" required/>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <button type="button" [routerLink]="['/']">Cancel</button>
+                <button type="submit" [disabled]="uploadForm.invalid">Submit</button>
+            </td>
+        </tr>
+    </table>
+</form>

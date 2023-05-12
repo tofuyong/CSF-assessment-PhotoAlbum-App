@@ -1,11 +1,11 @@
-<h2>Photo Storage</h2>
-
-<button type="button" [routerLink]="['/upload']">Upload</button>
-
-<table *ngFor="let bundle of bundles">
+<table class="container">
     <tr>
-        <td></td>
-        <td></td>
+        <td><h2>Photo Storage</h2></td>
+        <td><button type="button" [routerLink]="['/upload']">Upload</button></td>
+    </tr>
+    <tr *ngFor="let bundle of bundles">
+        <td><a [routerLink]="['/display', bundle.bundleId]">{{ bundle.title | titlecase }}</a></td>
+        <td>{{bundle.date | date:'MMM d, yyyy' }}</td>
     </tr>
 </table>
 

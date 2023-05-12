@@ -1,10 +1,8 @@
 package ibf2022.batch2.csf.backend.repositories;
 
 import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -15,13 +13,10 @@ import ibf2022.batch2.csf.backend.models.Bundle;
 @Repository
 public class ArchiveRepository {
 
-	private static final Logger logger = LoggerFactory.getLogger(ArchiveRepository.class);
-
 	@Autowired
     private MongoTemplate mongoTemplate;
 	
 	private static final String ARCHIVES_COL = "archives";
-
 
 	//TODO: Task 4
 	// You are free to change the parameter and the return type
@@ -52,7 +47,6 @@ public class ArchiveRepository {
 		Criteria criteria = Criteria.where("bundleId").is(bundleId);
 		Query query = Query.query(criteria);
 		Bundle bundle = mongoTemplate.findOne(query, Bundle.class, ARCHIVES_COL);
-		// logger.info(">>> Bundle title:" + bundle.getTitle());
 		return bundle;
 	}
 
@@ -62,12 +56,11 @@ public class ArchiveRepository {
 	// Write the native mongo query that you will be using in this method
 	//
 	/* 
-		db.archives.find({ }) 
+		db.archives.find().sort({ date: -1, title: -1 })
 	*/
 	public List<Bundle> getBundles(/* any number of parameters here */) {
-		Query query = new Query();
+		Query query = new Query().with(Sort.by(Sort.Direction.DESC, "date", "title"));
         return mongoTemplate.find(query, Bundle.class, ARCHIVES_COL);
 	}
-
 
 }

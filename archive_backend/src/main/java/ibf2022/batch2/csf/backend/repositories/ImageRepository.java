@@ -33,7 +33,7 @@ public class ImageRepository {
 
     public String upload(File file) throws IOException{
 
-        // Check file size - necessary?
+        // Check file size
         if (file.length() > MAX_FILE_SIZE) {
             throw new IOException("File is too large!");
         }
@@ -78,6 +78,5 @@ public class ImageRepository {
                 CannedAccessControlList.PublicRead);
         s3Client.putObject(putRequest);
         return "%s.%s".formatted(key, filenameExt);
-    
 	}
 }

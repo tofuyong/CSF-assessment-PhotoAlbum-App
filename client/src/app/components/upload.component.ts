@@ -12,6 +12,7 @@ export class UploadComponent implements OnInit {
 
   uploadForm!: FormGroup
   selectedFile!: File;
+  title!: string;
 
   constructor(private fb: FormBuilder, private uploadSvc: UploadService, private router: Router) { }
 
@@ -50,11 +51,16 @@ export class UploadComponent implements OnInit {
         this.uploadSvc.upload(formData)
         .then(
           response => {
-          console.log('Upload completed successfully', response);
+            const bundleId: string = response.bundleId;
+            console.log('Upload completed successfully. Bundle ID: ', bundleId);
+            this.router.navigate(['/display', bundleId]);
           },
-          error => console.log('Error while uploading', error)
+          error => {
+            console.log('Error while uploading', error);
+            alert('Failed to upload');
+          }
         );
-        this.router.navigate(['/']);
+        
     };
   }
 

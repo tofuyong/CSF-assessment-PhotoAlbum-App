@@ -1,0 +1,11 @@
+<h2>{{ title | titlecase }}</h2>
+
+<p>by {{ name | titlecase }} on {{ date }} </p>
+
+<p>{{ comments }}</p>
+
+<div *ngFor="let url of imgUrls">
+    <img [src]="url" alt="bundle image" width="200px">
+</div>
+
+<button type="button" [routerLink]="['/upload']">Back</button>

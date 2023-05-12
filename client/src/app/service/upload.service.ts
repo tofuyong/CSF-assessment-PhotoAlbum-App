@@ -7,11 +7,12 @@ import { firstValueFrom } from 'rxjs';
 })
 export class UploadService {
 
-  private UPLOAD_URL = "/upload";
+  private UPLOAD_URL = "/api/upload";
 
   constructor(private httpClient: HttpClient) { }
 
-  upload(formData: FormData){
-    return firstValueFrom(this.httpClient.post(this.UPLOAD_URL, formData, { responseType: 'text' }));
+  upload(formData: FormData): Promise<any> {
+    return firstValueFrom(this.httpClient.post(this.UPLOAD_URL, formData, { responseType: 'json' }));
   }
+  
 }

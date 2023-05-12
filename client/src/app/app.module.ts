@@ -6,11 +6,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { UploadComponent } from './components/upload.component';
 import { AppRoutingModule } from './app-routing.module';
+import { DisplayComponent } from './components/display.component';
+import { LandingComponent } from './components/landing.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UploadComponent
+    UploadComponent,
+    DisplayComponent,
+    LandingComponent
   ],
   imports: [
     BrowserModule,
